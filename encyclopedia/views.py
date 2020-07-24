@@ -41,4 +41,18 @@ def newpage(request):
     else:
         return render(request, 'encyclopedia/newpage.html')
       
+def edit(request, entry_id):
+    entry = util.get_entry(entry_id)
+    # entry = markdown2.markdown(entry)
+    # print(entry)
+    return render(request, 'encyclopedia/editpage.html', {'title':entry_id, 'text':entry})
+
+def savedit(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        # print(title)
+        text = request.POST['text']
+        # print(text)
+        util.save_entry(title, text)
+        return redirect(f'/wiki/{title}')
 

@@ -5,5 +5,6 @@
 {% endblock %}
 
 {% block body %}
-     {{content|safe}}
+    <a class="edit-btn" href="{% url 'edit' title %}">Edit</a>
+    {{content|safe}}
 {% endblock %}
