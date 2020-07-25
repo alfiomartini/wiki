@@ -56,3 +56,20 @@ def savedit(request):
         util.save_entry(title, text)
         return redirect(f'/wiki/{title}')
 
+def search(request, term):
+    # print(term)
+    new_list = []
+    entries = util.list_entries()
+    for k in range(len(entries)):
+        entries[k] = entries[k].lower()
+    # print(entries)
+    if term.lower() in entries:
+        return redirect(f'/wiki/{term}')
+    for entry in entries:
+        if term.lower() in entry:
+            new_list.append(entry)
+    return render(request, "encyclopedia/index.html", {"entries":new_list, "term":term})
+    
+
+
+

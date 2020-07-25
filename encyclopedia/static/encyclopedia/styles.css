@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 body {
     margin: 0;
     background-color: white;
@@ -25,6 +28,7 @@ h1 {
     width: 100%;
     font-size: 15px;
     line-height: 15px;
+    margin-bottom: 15px;
 }
 
  
@@ -50,7 +54,24 @@ h1 {
 }
 
 .edit-btn:hover{
-    background-color: #444444;
-    color: lightgreen;
+    background-color: navy;
+    color: whitesmoke;
     text-decoration: none;
-  }
+  } 
+
+.menu{
+    display: inline-block;
+    padding:4px 12px;
+    width: 100%;
+    margin:5px 0;
+    text-decoration: none;
+    color: whitesmoke;
+    background-color: darkslategray;
+    border-radius: 5px;
+}
+
+.menu:hover{
+    background-color: navy;
+    color: whitesmoke;
+    text-decoration: none;
+}
