@@ -12,10 +12,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="sidebar col-md-3">
-                    <h2>Wiki</h2>
+                    <h2>Wiki </h2>
                     <form>
                         <input class="search" type="text" name="q" value="{{term}}"
-                        placeholder="Search Encyclopedia" id="search-input">
+                        placeholder="Search Encyclopedia" id="search-input"
+                        autocomplete="on" autofocus>
                         <!-- <input type="submit" value="Search"> -->
                     </form>
                     <div>
@@ -26,6 +27,9 @@
                     </div>
                     <div>
                         <a class="menu" href="{% url 'random_page' %}">Random Page</a>
+                    </div>
+                    <div>
+                        <a class="menu" href="{% url 'logout' %}">Log out</a>
                     </div>
                     {% block nav %}
                     {% endblock %}

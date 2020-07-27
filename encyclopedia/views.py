@@ -1,14 +1,33 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from . import util
 import markdown2
 import random
-from django.shortcuts import redirect
+from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
 def index(request):
-    return render(request, "encyclopedia/index.html", {"entries":util.list_entries()})
+    if  not request.user.is_authenticated:
+        return render(request, 'encyclopedia/login.html', {'message':None})
+    else:
+        return render(request, "encyclopedia/index.html", {"entries":util.list_entries()})
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username = username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            return render(request, 'encyclopedia/login.html', {'message':"Invalid credentials!"})
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'encyclopedia/login.html', {'message': 'Logged out'})
 
 def random_page(request):
     entries = util.list_entries()
@@ -68,7 +87,7 @@ def search(request, term):
     for entry in entries:
         if term.lower() in entry:
             new_list.append(entry)
-    return render(request, "encyclopedia/index.html", {"entries":new_list, "term":term})
+    return render(request, "encyclopedia/search.html", {"entries":new_list, "term":term})
     
 
 

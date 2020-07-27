@@ -1,0 +1,2 @@
+admin:password01
+alfio:pass01pass01

@@ -22,6 +22,6 @@ function listeners(){
 // see: https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
     function search_get(event){
         clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(searchEvents, 700);
+        debounceTimeout = setTimeout(searchEvents, 1000);
     }
 }
