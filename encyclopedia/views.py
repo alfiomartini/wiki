@@ -21,12 +21,14 @@ def login_view(request):
         user = authenticate(request, username = username, password=password)
         if user is not None:
             login(request, user)
+            request.session['user'] = username
             return redirect('index')
         else:
             return render(request, 'encyclopedia/login.html', {'message':"Invalid credentials!"})
 
 def logout_view(request):
     logout(request)
+    request.session.clear()
     return render(request, 'encyclopedia/login.html', {'message': 'Logged out'})
 
 def random_page(request):
