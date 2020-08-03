@@ -28,9 +28,14 @@ h1 {
     width: 100%;
     font-size: 15px;
     line-height: 15px;
-    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 5px 0;
 }
 
+#search-button{
+    width:100%;
+    margin-top: -10px;
+}
  
 .sidebar {
     background-color: #f0f0f0;

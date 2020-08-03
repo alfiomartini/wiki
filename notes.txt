@@ -1,2 +1,3 @@
-admin:password01
-alfio:pass01pass01
+admin:admin, password01
+user:alfio, pass01pass01
+user:john_doe, password01

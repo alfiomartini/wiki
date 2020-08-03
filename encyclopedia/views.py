@@ -5,6 +5,10 @@ import markdown2
 import random
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+# see: https://stackoverflow.com/questions/3578882/how-to-specify-the-login-required-redirect-url-in-django
+from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
+from .models import User
 
 # Create your views here.
 
@@ -21,16 +25,47 @@ def login_view(request):
         user = authenticate(request, username = username, password=password)
         if user is not None:
             login(request, user)
-            request.session['user'] = username
+            request.session['name_id'] = username
             return redirect('index')
         else:
             return render(request, 'encyclopedia/login.html', {'message':"Invalid credentials!"})
 
+def register(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        email = request.POST["email"]
+
+        # Ensure password matches confirmation
+        password = request.POST["password"]
+        confirmation = request.POST["confirmation"]
+        if password != confirmation:
+            return render(request, "encyclopedia/register.html", {
+                "message": "Passwords must match."
+            })
+
+        # Attempt to create new user
+        try:
+            user = User.objects.create_user(username, email, password)
+            user.save()
+        except IntegrityError:
+            # print("Integrity error")
+            return render(request, "encyclopedia/register.html", {
+                "message": "Username already taken."
+            })
+        # login(request, user)
+        # return redirect('index')
+        else:
+            return redirect('index')
+    else:
+        return render(request, "encyclopedia/register.html")
+
+@login_required(login_url='index')
 def logout_view(request):
     logout(request)
     request.session.clear()
     return render(request, 'encyclopedia/login.html', {'message': 'Logged out'})
 
+@login_required(login_url='index')
 def random_page(request):
     entries = util.list_entries()
     size = len(entries)
@@ -38,6 +73,7 @@ def random_page(request):
     entry_id = entries[index]
     return redirect(f'/wiki/{entry_id}')
 
+@login_required(login_url='index')
 def entry(request, entry_id):
     entry = util.get_entry(entry_id)
     if entry:
@@ -47,6 +83,7 @@ def entry(request, entry_id):
     else:
         return render(request, "encyclopedia/error.html", {"message":f"Entry {entry_id} not found!"})
 
+@login_required(login_url='index')
 def newpage(request):
     if request.method == 'POST':
         title = request.POST['title']
@@ -61,13 +98,15 @@ def newpage(request):
             return redirect(f'/wiki/{title}')
     else:
         return render(request, 'encyclopedia/newpage.html')
-      
+
+@login_required(login_url='index')
 def edit(request, entry_id):
     entry = util.get_entry(entry_id)
     # entry = markdown2.markdown(entry)
     # print(entry)
     return render(request, 'encyclopedia/editpage.html', {'title':entry_id, 'text':entry})
 
+@login_required(login_url='index')
 def savedit(request):
     if request.method == 'POST':
         title = request.POST['title']
@@ -77,6 +116,7 @@ def savedit(request):
         util.save_entry(title, text)
         return redirect(f'/wiki/{title}')
 
+@login_required(login_url='index')
 def search(request, term):
     # print(term)
     new_list = []
@@ -88,7 +128,7 @@ def search(request, term):
         return redirect(f'/wiki/{term}')
     for entry in entries:
         if term.lower() in entry:
-            new_list.append(entry)
+            new_list.append(entry.capitalize())
     return render(request, "encyclopedia/search.html", {"entries":new_list, "term":term})
     
 

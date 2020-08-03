@@ -3,10 +3,12 @@ addEventListener('DOMContentLoaded', listeners);
 function listeners(){
     let input = document.querySelector('#search-input');
     let debounceTimeout = null;
+    let button = document.getElementById('search-button')
 
-    input.addEventListener('keyup', search_get);
-    input.addEventListener('change', search_get);
-    input.addEventListener('paste', search_get);
+    // input.addEventListener('keyup', search_get);
+    // input.addEventListener('change', search_get);
+    // input.addEventListener('paste', search_get);
+    button.addEventListener('click', searchEvents)
    
     function searchEvents(){
         // let input = document.querySelector('input');
@@ -22,6 +24,6 @@ function listeners(){
 // see: https://levelup.gitconnected.com/debounce-in-javascript-improve-your-applications-performance-5b01855e086
     function search_get(event){
         clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(searchEvents, 1000);
+        debounceTimeout = setTimeout(searchEvents, 1200);
     }
 }

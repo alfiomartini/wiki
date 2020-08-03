@@ -13,12 +13,19 @@
             <div class="row">
                 <div class="sidebar col-md-3">
                     <h2>Wiki </h2>
-                    {% if 'user' in request.session %}
+                    <!--  if 'name_id' in request.session  (works as well)-->
+                    {% if request.user.is_authenticated %}
+                        <h5>Logged in as ({{request.user.username}})</h5> <!--or request.session.name_id -->
                         <form>
+                          <div class="form-group">
                             <input class="search" type="text" name="q" value="{{term}}"
                             placeholder="Search Encyclopedia" id="search-input"
                             autocomplete="on" autofocus>
                             <!-- <input type="submit" value="Search"> -->
+                          </div>
+                          <div class="form-group">
+                            <input class="btn btn-primary" type="button" value="Search" id="search-button">
+                          </div>
                         </form>
                         <div>
                             <a class="menu" href="{% url 'index' %}">Home</a>
@@ -37,6 +44,9 @@
                     {% else %}
                         <div>
                             <a class="menu" href="{% url 'index' %}">Log in</a>
+                        </div>
+                        <div>
+                            <a class="menu" href="{% url 'register' %}">Register</a>
                         </div>
                     {% endif %}
                 </div>
