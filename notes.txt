@@ -1,3 +1,3 @@
 admin:admin, password01
-user:alfio, pass01pass01
-user:john_doe, password01
+user:alfio,  password01
+user:johndoe, password01

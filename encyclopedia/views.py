@@ -34,7 +34,8 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
-
+        firstname = request.POST["firstname"]
+        lastname = request.POST["lastname"]
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
@@ -44,18 +45,16 @@ def register(request):
             })
 
         # Attempt to create new user
-        try:
-            user = User.objects.create_user(username, email, password)
-            user.save()
-        except IntegrityError:
-            # print("Integrity error")
+        # https://stackoverflow.com/questions/29588808/django-how-to-check-if-username-already-exists
+        if User.objects.filter(username=username).exists():
             return render(request, "encyclopedia/register.html", {
-                "message": "Username already taken."
-            })
-        # login(request, user)
-        # return redirect('index')
+                "message": "Username already taken."})
         else:
-            return redirect('index')
+            user = User.objects.create_user(username, email, password)
+            user.first_name = firstname
+            user.last_name = lastname
+            user.save()
+            return redirect('index')    
     else:
         return render(request, "encyclopedia/register.html")
 
@@ -78,7 +77,6 @@ def entry(request, entry_id):
     entry = util.get_entry(entry_id)
     if entry:
         entry = markdown2.markdown(entry)
-        # return HttpResponse(entry)
         return render(request, "encyclopedia/entry.html", {'title':entry_id, 'content':entry})
     else:
         return render(request, "encyclopedia/error.html", {"message":f"Entry {entry_id} not found!"})
@@ -87,9 +85,7 @@ def entry(request, entry_id):
 def newpage(request):
     if request.method == 'POST':
         title = request.POST['title']
-        # print(title)
         text = request.POST['text']
-        # print(text)
         entries = util.list_entries()
         if title in entries:
             return render(request, 'encyclopedia/error.html', {'message':f"Entry {title} already exists!"})
@@ -102,28 +98,22 @@ def newpage(request):
 @login_required(login_url='index')
 def edit(request, entry_id):
     entry = util.get_entry(entry_id)
-    # entry = markdown2.markdown(entry)
-    # print(entry)
     return render(request, 'encyclopedia/editpage.html', {'title':entry_id, 'text':entry})
 
 @login_required(login_url='index')
 def savedit(request):
     if request.method == 'POST':
         title = request.POST['title']
-        # print(title)
         text = request.POST['text']
-        # print(text)
         util.save_entry(title, text)
         return redirect(f'/wiki/{title}')
 
 @login_required(login_url='index')
 def search(request, term):
-    # print(term)
     new_list = []
     entries = util.list_entries()
     for k in range(len(entries)):
         entries[k] = entries[k].lower()
-    # print(entries)
     if term.lower() in entries:
         return redirect(f'/wiki/{term}')
     for entry in entries:
