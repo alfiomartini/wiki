@@ -8,7 +8,8 @@ function listeners(){
     // input.addEventListener('keyup', search_get);
     // input.addEventListener('change', search_get);
     // input.addEventListener('paste', search_get);
-    button.addEventListener('click', searchEvents)
+    if (button)
+        button.addEventListener('click', searchEvents)
    
     function searchEvents(){
         // let input = document.querySelector('input');

@@ -86,3 +86,13 @@ h1 {
     color: whitesmoke;
     text-decoration: none;
 }
+
+.page-heading{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 40px 0;
+}
+
+.entries{
+    font-size: 19px;
+}

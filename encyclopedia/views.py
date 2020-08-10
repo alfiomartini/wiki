@@ -119,7 +119,7 @@ def search(request, term):
     for entry in entries:
         if term.lower() in entry:
             new_list.append(entry.capitalize())
-    return render(request, "encyclopedia/search.html", {"entries":new_list, "term":term})
+    return render(request, "encyclopedia/search.html", {"entries":new_list})
     
 
 
