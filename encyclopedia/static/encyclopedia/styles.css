@@ -6,6 +6,11 @@ body {
     background-color: white;
 }
 
+.main{
+    padding: 10px 30px !important;
+    text-align: justify;
+}
+
 code {
     white-space: pre;
 }
@@ -62,6 +67,7 @@ h1 {
     padding: 4px 12px;
     border: none;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .edit-btn:hover{

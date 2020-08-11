@@ -15,7 +15,7 @@
                     <h2>Wiki </h2>
                     <!--  if 'name_id' in request.session  (works as well)-->
                     {% if request.user.is_authenticated %}
-                        <h5>Logged in as ({{request.user.username}})</h5> <!--or request.session.name_id -->
+                        <a class="edit-btn" href="#"> Logged in as {{request.user.username}}</a> <!--or request.session.name_id -->
                         <form>
                           <div class="form-group">
                             <input class="search" type="text" name="q" value=""
