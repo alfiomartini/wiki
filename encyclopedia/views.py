@@ -29,6 +29,8 @@ def login_view(request):
             return redirect('index')
         else:
             return render(request, 'encyclopedia/login.html', {'message':"Invalid credentials!"})
+    else:
+        return render(request, 'encyclopedia/login.html', {'message':None})        
 
 def register(request):
     if request.method == "POST":
