@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h2 class="page-heading">All Pages</h2>
+    <h2 class="page-heading menu">All Pages</h2>
 
     <ul class="entries">
         {% for entry in entries %}
-            <li><a href="{% url 'entry' entry %}">{{entry}}</a></li>
+            <li><a href="{% url 'entry' entry %}" class="">{{entry}}</a></li>
         {% endfor %}
     </ul>
 
