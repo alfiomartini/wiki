@@ -91,8 +91,8 @@ h1 {
 
 .entries{
     font-size: 19px;
-    list-style-type: none;
-    padding-left: 5px;
+    /* list-style-type: none; */
+    padding-left: 20px;
 }
 
 .entries li a {
