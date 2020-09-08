@@ -5,6 +5,14 @@ from django.core.files.storage import default_storage
 
 # see: https://www.tutorialspoint.com/How-to-run-Python-functions-from-command-line
 
+def remove_file(filename):
+    filename = f"entries/{filename}.md"
+    if os.path.exists(filename):
+        os.remove(filename)
+        print(f'filename {filename} was removed.')
+    else:
+        print(f"File {filename} does not exist.")
+
 def collapse_newlines(text):
     newlines = re.compile(r'\n\n+')
     text = newlines.sub('\n\n',text)

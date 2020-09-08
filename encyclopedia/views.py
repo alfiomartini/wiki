@@ -98,7 +98,7 @@ def newpage(request):
             myutil.save_entry(title, text)
             return redirect(f'/wiki/{title}')
     else:
-        return render(request, 'encyclopedia/newpage.html')
+        return render(request, 'encyclopedia/error.html', {'message':f"Entry {title} already exists!"})
 
 @login_required(login_url='index')
 def edit(request, entry_id):
@@ -115,6 +115,21 @@ def savedit(request):
         text = request.POST['text']
         myutil.save_entry(title, text)
         return redirect(f'/wiki/{title}')
+
+@login_required(login_url='index')
+def remove(request, entry_id):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            myutil.remove_file(entry_id)
+            return redirect('index')
+        else: 
+            entry = myutil.get_entry(entry_id)
+            entry = myutil.collapse_newlines(entry)
+            return render(request, 'encyclopedia/removepage.html', {'title':entry_id, 'text':entry})
+    else:
+        return render(request, 'encyclopedia/error.html', 
+        {'message':'Sorry, only a superuser can perform this action.'})
+
 
 @login_required(login_url='index')
 def search(request, term):
