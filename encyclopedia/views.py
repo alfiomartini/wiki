@@ -63,7 +63,7 @@ def register(request):
 def logout_view(request):
     logout(request)
     request.session.clear()
-    return render(request, 'encyclopedia/login.html', {'message': 'Logged out'})
+    return render(request, 'encyclopedia/login.html', {'message': ''})
 
 @login_required(login_url='index')
 def random_page(request):

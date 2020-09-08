@@ -40,6 +40,20 @@
                         <div>
                             <a class="menu" href="{% url 'logout' %}">Log out</a>
                         </div>
+                        <script src="{% static 'encyclopedia/search.js' %}"></script>
+                        <script>
+                             window.addEventListener('resize', () => {
+                                const mediaq = window.matchMedia( "(max-width: 767px)" );
+                                let sidebar = document.querySelector('.sidebar');
+                                if (mediaq.matches){
+                                    // console.log('Hello 767px');
+                                    sidebar.style.height = '65vh';
+                                }
+                                else{
+                                    sidebar.style.height = '100vh'; 
+                                }
+                            })
+                        </script>
                         {% block nav %}
                         {% endblock %}
                     {% else %}
@@ -49,6 +63,29 @@
                         <div>
                             <a class="menu" href="{% url 'register' %}">Register</a>
                         </div>
+                        <script>
+                            const mediaq = window.matchMedia( "(max-width: 767px)" );
+                            let sidebar = document.querySelector('.sidebar');
+                            if (mediaq.matches){
+                                // console.log('Hello 767px');
+                                sidebar.style.height = '30vh';
+                            }
+                            else{
+                                sidebar.style.height = '100vh'; 
+                            }
+
+                            window.addEventListener('resize', () => {
+                                const mediaq = window.matchMedia( "(max-width: 767px)" );
+                                let sidebar = document.querySelector('.sidebar');
+                                if (mediaq.matches){
+                                    // console.log('Hello 767px');
+                                    sidebar.style.height = '30vh';
+                                }
+                                else{
+                                    sidebar.style.height = '100vh'; 
+                                }
+                            })
+                        </script>
                     {% endif %}
                 </div>
                 <div class="main col-md-9">
@@ -57,6 +94,5 @@
                 </div>
             </div>
         </div>
-        <script src="{% static 'encyclopedia/search.js' %}"></script>
     </body>
 </html>

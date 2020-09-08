@@ -7,7 +7,7 @@ body {
 }
 
 .main{
-    padding: 10px 30px !important;
+    padding: 10px 20px !important;
     text-align: justify;
 }
 
@@ -139,6 +139,6 @@ h1 {
 
 @media screen and (max-width:767px){
     .sidebar{
-        height:60vh;
+        height:65vh;
     }
 }
