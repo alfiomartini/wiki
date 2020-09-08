@@ -46,7 +46,6 @@
                                 const mediaq = window.matchMedia( "(max-width: 767px)" );
                                 let sidebar = document.querySelector('.sidebar');
                                 if (mediaq.matches){
-                                    // console.log('Hello 767px');
                                     sidebar.style.height = '65vh';
                                 }
                                 else{
@@ -67,7 +66,6 @@
                             const mediaq = window.matchMedia( "(max-width: 767px)" );
                             let sidebar = document.querySelector('.sidebar');
                             if (mediaq.matches){
-                                // console.log('Hello 767px');
                                 sidebar.style.height = '30vh';
                             }
                             else{
@@ -75,10 +73,7 @@
                             }
 
                             window.addEventListener('resize', () => {
-                                const mediaq = window.matchMedia( "(max-width: 767px)" );
-                                let sidebar = document.querySelector('.sidebar');
                                 if (mediaq.matches){
-                                    // console.log('Hello 767px');
                                     sidebar.style.height = '30vh';
                                 }
                                 else{
