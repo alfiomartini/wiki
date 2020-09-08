@@ -5,6 +5,11 @@ from django.core.files.storage import default_storage
 
 # see: https://www.tutorialspoint.com/How-to-run-Python-functions-from-command-line
 
+def collapse_newlines(text):
+    newlines = re.compile(r'\n\n+')
+    text = newlines.sub('\n\n',text)
+    return text
+
 def list_entries():
     """
     Returns a list of all names of encyclopedia entries.
@@ -18,9 +23,10 @@ def list_entries():
     return entries_list
 
 
-def toLower(text):
-  return text.lower()
-  
+def normalize(text):
+    # remove white spaces => lower -> capitalize first char
+    return text.replace(" ", "").lower().title()
+
 def save_entry(title, content):
     """
     Saves an encyclopedia entry, given its title and Markdown

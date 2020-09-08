@@ -86,8 +86,12 @@ def entry(request, entry_id):
 def newpage(request):
     if request.method == 'POST':
         title = request.POST['title']
+        # normalize title
+        title = myutil.normalize(title)
         text = request.POST['text']
+        # normalize entries list 
         entries = myutil.list_entries()
+        print(entries)
         if title in entries:
             return render(request, 'encyclopedia/error.html', {'message':f"Entry {title} already exists!"})
         else:
@@ -99,12 +103,15 @@ def newpage(request):
 @login_required(login_url='index')
 def edit(request, entry_id):
     entry = myutil.get_entry(entry_id)
+    entry = myutil.collapse_newlines(entry)
     return render(request, 'encyclopedia/editpage.html', {'title':entry_id, 'text':entry})
 
 @login_required(login_url='index')
 def savedit(request):
     if request.method == 'POST':
         title = request.POST['title']
+        # normalize title for saving
+        title = myutil.normalize(title)
         text = request.POST['text']
         myutil.save_entry(title, text)
         return redirect(f'/wiki/{title}')
@@ -116,10 +123,11 @@ def search(request, term):
     for k in range(len(entries)):
         entries[k] = entries[k].lower()
     if term.lower() in entries:
+        term = myutil.normalize(term)
         return redirect(f'/wiki/{term}')
     for entry in entries:
         if term.lower() in entry:
-            new_list.append(entry.capitalize())
+            new_list.append(entry)
     return render(request, "encyclopedia/search.html", {"entries":new_list})
     
 
