@@ -41,16 +41,10 @@
                             <a class="menu" href="{% url 'logout' %}">Log out</a>
                         </div>
                         <script src="{% static 'encyclopedia/search.js' %}"></script>
-                        <script>
-                             window.addEventListener('resize', () => {
-                                const mediaq = window.matchMedia( "(max-width: 767px)" );
-                                let sidebar = document.querySelector('.sidebar');
-                                if (mediaq.matches){
-                                    sidebar.style.height = '65vh';
-                                }
-                                else{
-                                    sidebar.style.height = '100vh'; 
-                                }
+                        <script type="module">
+                            import {sidebar_height} from '../static/encyclopedia/sidebar.js'
+                            window.addEventListener('resize', () => {
+                                sidebar_height(767, 65, 100);
                             })
                         </script>
                         {% block nav %}
@@ -62,23 +56,12 @@
                         <div>
                             <a class="menu" href="{% url 'register' %}">Register</a>
                         </div>
-                        <script>
-                            const mediaq = window.matchMedia( "(max-width: 767px)" );
-                            let sidebar = document.querySelector('.sidebar');
-                            if (mediaq.matches){
-                                sidebar.style.height = '30vh';
-                            }
-                            else{
-                                sidebar.style.height = '100vh'; 
-                            }
+                        <script type="module">
+                            import {sidebar_height} from '../static/encyclopedia/sidebar.js'
+                            sidebar_height(767, 30, 100); // max_width, small_height, big_height
 
                             window.addEventListener('resize', () => {
-                                if (mediaq.matches){
-                                    sidebar.style.height = '30vh';
-                                }
-                                else{
-                                    sidebar.style.height = '100vh'; 
-                                }
+                                sidebar_height(767, 30, 100);
                             })
                         </script>
                     {% endif %}
