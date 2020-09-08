@@ -36,6 +36,14 @@ h1 {
 #search-button{
     width:100%;
     margin-top: -10px;
+    background-color: #7f5a83;
+    background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%) ;
+}
+
+#search-button:hover{
+    background-color: blue;
+    background-image:none;
+    color: whitesmoke;
 }
  
 .sidebar {
@@ -89,21 +97,43 @@ h1 {
     margin: 40px 0;
 }
 
+
 .entries{
-    font-size: 19px;
-    /* list-style-type: none; */
-    padding-left: 20px;
-}
-
-.entries li a {
-    color: darkslategray;
+    list-style-type: none;
+    width: 50%;
+    margin:50px auto;
+    padding: 15px 10px 15px 10px;
+    /* background-color: #330033; */
+    background-color: #7f5a83;
+    background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
+    border: 1px solid darkblue;
+    border-radius: 5px;
+  }
+  
+.entries li a{
+    display: block;
     text-decoration: none;
-}
+    font-size: 1.1rem;
+    font-family:  sans-serif;
+    padding: 1px 6px;
+    color: lightgray;
+  }
 
-.entries li a:hover {
-    color: darkblue;
-    text-decoration: none;
-}
+.entries li a:hover{
+    color:black;
+    background-color: whitesmoke;
+  }
+
+.entries li a::before{
+    content: '\2329';
+    padding-right: 2px;
+  }
+  
+.entries li a::after{
+    content: '\232a';
+    padding-left: 2px;
+  }
+  
 
 /* Media queries */
 

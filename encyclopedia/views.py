@@ -123,9 +123,14 @@ def remove(request, entry_id):
             myutil.remove_file(entry_id)
             return redirect('index')
         else: 
-            entry = myutil.get_entry(entry_id)
-            entry = myutil.collapse_newlines(entry)
-            return render(request, 'encyclopedia/removepage.html', {'title':entry_id, 'text':entry})
+            entries = myutil.list_entries()
+            if entry_id in entries:
+                entry = myutil.get_entry(entry_id)
+                entry = myutil.collapse_newlines(entry)
+                return render(request, 'encyclopedia/removepage.html', {'title':entry_id, 'text':entry})
+            else:
+                return render(request, 'encyclopedia/error.html', 
+                {'message':f'Sorry, entry {entry_id} does not exist.'})
     else:
         return render(request, 'encyclopedia/error.html', 
         {'message':'Sorry, only a superuser can perform this action.'})
