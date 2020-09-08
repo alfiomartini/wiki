@@ -127,7 +127,7 @@ def search(request, term):
         return redirect(f'/wiki/{term}')
     for entry in entries:
         if term.lower() in entry:
-            new_list.append(entry)
+            new_list.append(myutil.normalize(entry))
     return render(request, "encyclopedia/search.html", {"entries":new_list})
     
 
