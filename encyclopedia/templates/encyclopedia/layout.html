@@ -42,10 +42,21 @@
                         </div>
                         <script src="{% static 'encyclopedia/search.js' %}"></script>
                         <script type="module">
-                            import {sidebar_height} from '../static/encyclopedia/sidebar.js'
-                            window.addEventListener('resize', () => {
+                            import {sidebar_height, isMaxHeight} from '../static/encyclopedia/sidebar.js'
+                            window.onload = () => {
                                 sidebar_height(767, 65, 100);
-                            })
+                                window.addEventListener('resize', () => {
+                                sidebar_height(767, 65, 100);
+                                })
+
+                                if (isMaxHeight(767)){
+                                    let entries = document.querySelector('.entries');
+                                    if (entries){
+                                        entries.scrollIntoView({behavior:'smooth'})
+                                    }
+                                }
+                            }
+                            
                         </script>
                         {% block nav %}
                         {% endblock %}
