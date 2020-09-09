@@ -30,7 +30,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 # when debug is false
 # ALLOWED_HOSTS = ['localhost'] 
 
-ALLOWED_HOSTS = [] 
+ALLOWED_HOSTS = [".herokuapp.com"] 
 
 
 
