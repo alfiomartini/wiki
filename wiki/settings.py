@@ -27,7 +27,11 @@ SECRET_KEY = os.environ.get('WIKI_SECRET_KEY')
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = []
+# when debug is false
+# ALLOWED_HOSTS = ['localhost'] 
+
+ALLOWED_HOSTS = [] 
+
 
 
 # Application definition
@@ -126,5 +130,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 STATIC_URL = '/static/'
 # Extra lookup directories for collectstatic to find static files
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'), 
+    os.path.join(BASE_DIR, 'encyclopedia/static'), 
 )
