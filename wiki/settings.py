@@ -28,9 +28,7 @@ SECRET_KEY = os.environ.get('WIKI_SECRET_KEY')
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # when debug is false
-# ALLOWED_HOSTS = ['localhost'] 
-
-ALLOWED_HOSTS = [".herokuapp.com"] 
+ALLOWED_HOSTS = ['localhost', ".herokuapp.com"] 
 
 
 
@@ -121,13 +119,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+#  Static Files serving
+# see: https://medium.com/@vonkunesnewton/understanding-static-files-in-django-heroku-1b8d2f003977
+# see: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Deployment
+
 # The absolute path to the directory where collectstatic will collect static files for deployment.
+# python manage.py collecstatic
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
 # Extra lookup directories for collectstatic to find static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'encyclopedia/static'), 
