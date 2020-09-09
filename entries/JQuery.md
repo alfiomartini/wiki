@@ -12,5 +12,4 @@ JQuery includes the following features:
 
 * JSON parsing
 
-* Effects and animations
-
+* Effects and animations

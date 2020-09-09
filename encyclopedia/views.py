@@ -15,7 +15,8 @@ def index(request):
     if  not request.user.is_authenticated:
         return render(request, 'encyclopedia/login.html', {'message':None})
     else:
-        return render(request, "encyclopedia/index.html", {"entries":myutil.list_entries()})
+        entries = myutil.list_entries()
+        return render(request, "encyclopedia/index.html", {"entries":entries})
 
 def login_view(request):
     if request.method == 'POST':
@@ -98,7 +99,7 @@ def newpage(request):
             myutil.save_entry(title, text)
             return redirect(f'/wiki/{title}')
     else:
-        return render(request, 'encyclopedia/error.html', {'message':f"Entry {title} already exists!"})
+        return render(request, 'encyclopedia/newpage.html', {})
 
 @login_required(login_url='index')
 def edit(request, entry_id):
