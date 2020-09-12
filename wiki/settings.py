@@ -122,6 +122,7 @@ USE_TZ = True
 #  Static Files serving
 # see: https://medium.com/@vonkunesnewton/understanding-static-files-in-django-heroku-1b8d2f003977
 # see: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Deployment
+# see: https://medium.com/@vonkunesnewton/understanding-static-files-in-django-heroku-1b8d2f003977
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 # python manage.py collecstatic
