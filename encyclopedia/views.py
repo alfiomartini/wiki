@@ -18,6 +18,9 @@ def index(request):
         entries = myutil.list_entries()
         return render(request, "encyclopedia/index.html", {"entries":entries})
 
+def readme(request):
+    return render(request, 'encyclopedia/readme.html', {})
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']

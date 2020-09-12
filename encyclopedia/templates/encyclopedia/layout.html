@@ -40,6 +40,17 @@
                         <div>
                             <a class="menu" href="{% url 'logout' %}">Log out</a>
                         </div>
+                        <div class="mydropdown menu">
+                          <span>About</span>
+                          <div class="mydropdown-content">
+                              <div><a class="" 
+                                href="https://github.com/alfiomartini/wiki" target="_blank">
+                                Github
+                                 </a></div>
+                              <div><a class="" href="/readme">Readme</a></div>
+                              <div><a class="" href="mailto: alfio.martini@gmail.com">Email</a></div>
+                          </div>
+                        </div>
                         <script src="{% static 'encyclopedia/search.js' %}"></script>
                         <script type="module">
                             import {sidebar_height, isMaxHeight} from '../static/encyclopedia/sidebar.js'
