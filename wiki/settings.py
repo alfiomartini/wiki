@@ -13,7 +13,22 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# __file__ returns an absolute path and dirname is used twice to traverse two directories 
+#   above the settings.py file. What happens on your system?
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# os.path.dirname(path) will return a string of everything that comes
+# before the last slash in the path argument
+
+# C:\Users\alfio\Programming\GitHub\wiki\wiki\settings.py
+# print('abspath', os.path.abspath(__file__))
+
+# C:\Users\alfio\Programming\GitHub\wiki\wiki
+# print('first level', os.path.dirname(os.path.abspath(__file__)))
+
+# C:\Users\alfio\Programming\GitHub\wiki
+# print('BASE_DIR', BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -134,6 +149,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 STATIC_URL = '/static/'
 
 # Extra lookup directories for collectstatic to find static files
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'encyclopedia/static'), 
+# It is not needed in my case, since by default it looks into each
+# static file in the static folder of each app
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'encyclopedia/static'), 
+# )
+
+# https://docs.djangoproject.com/en/3.1/ref/settings/#settings-staticfiles
+# https://stackoverflow.com/questions/35571256/found-another-file-with-the-destination-path-where-is-that-other-file
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',  
 )
