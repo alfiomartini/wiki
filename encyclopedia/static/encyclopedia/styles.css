@@ -135,7 +135,70 @@ h1 {
   }
   
 
+/* CSS Dropdowns */
+
+.mydropdown {
+    position: relative;
+    display: block;
+  }
+  
+.mydropdown-content {
+    display: none;
+    position: absolute;
+    top:32px;
+    min-width: 100%;
+    padding: 10px 10px;
+    background-color: darkslategray;
+    color: whitesmoke;
+    z-index: 1;
+}
+  
+.mydropdown:hover .mydropdown-content {
+    display: block;
+}
+
+.mydropdown-content a{
+    text-decoration: none;
+    color: whitesmoke;
+    padding: 5px 5px;
+    display: block;
+    border-radius: 5px;
+}
+
+.mydropdown-content a:hover{
+    text-decoration: none;
+    color: darkslategray;
+    background-color: whitesmoke;
+}
+
+.readme-wrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 60px;
+}
+
+.readme{
+    background-color: #7f5a83;
+    background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
+    color:whitesmoke;
+    padding: 10px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
+    width: 60%;
+}
+
+.readme a{
+    color: lightgreen;
+}
+
 /* Media queries */
+
+@media (max-width:768px){
+    .readme{
+        width: 80%;
+    }
+}
 
 /* @media screen and (max-width:767px){
     .sidebar{

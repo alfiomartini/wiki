@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Readme
+{% endblock %}
+
+{% block body %}
+<div class="readme-wrapper">
+  <div class="readme">
+    <p>This application is implemented as a clone-like <em>Wikipedia</em>, where entries are saved in <strong>markdown</strong> notation and displayed to the user as an <strong>HTML</strong> file. The mapping from markdown to HTML is done by the excelent <a href="https://github.com/trentm/python-markdown2">markdown2</a> tool. The application provides facilities to <em>display all</em> pages in the encyclopedia, to <em>search</em> for a page or group of pages, to <em>edit</em> existing pages, to <em>create</em> new pages and to <em>display random</em> existing entries. Superusers can also <em>remove</em> indexed pages. In order to control the menu of available options, there are also pages for <em>loggin in</em> and <em>registering</em> of users. This application  is implemented with <em>HTML</em>, <em>CSS</em>, <em>Bootstrap</em>, <em>JavaScript</em>, <em>Python</em> and <em>Django</em>. It is an extended version of my original submission to a CS50 Web programming project. You can see it live <a href="https://web-docs.herokuapp.com/">here</a>.</p>
+  </div>
+</div>
+{% endblock %}
+
