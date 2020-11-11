@@ -32,6 +32,7 @@ def list_entries():
     entries_list = [re.sub(r"\.md$", "", filename)
                     for filename in filenames if filename.endswith(".md")]
     entries_list.sort()
+    print('list_entries', entries_list)
     return entries_list
 
 
