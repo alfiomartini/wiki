@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# __file__ returns an absolute path and dirname is used twice to traverse two directories 
+# __file__ returns an absolute path and dirname is used twice to traverse two directories
 #   above the settings.py file. What happens on your system?
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,8 +43,7 @@ SECRET_KEY = os.environ.get('WIKI_SECRET_KEY')
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # when debug is false
-ALLOWED_HOSTS = ['localhost', ".herokuapp.com"] 
-
+ALLOWED_HOSTS = ['localhost', ".herokuapp.com"]
 
 
 # Application definition
@@ -152,12 +151,12 @@ STATIC_URL = '/static/'
 # It is not needed in my case, since by default it looks into each
 # static file in the static folder of each app
 # STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'encyclopedia/static'), 
+#     os.path.join(BASE_DIR, 'encyclopedia/static'),
 # )
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#settings-staticfiles
 # https://stackoverflow.com/questions/35571256/found-another-file-with-the-destination-path-where-is-that-other-file
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',  
-)
+# STATICFILES_FINDERS = (
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+# )
