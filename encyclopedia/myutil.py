@@ -1,9 +1,11 @@
-import re, os
+import re
+import os
 
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 
 # see: https://www.tutorialspoint.com/How-to-run-Python-functions-from-command-line
+
 
 def remove_file(filename):
     filename = f"entries/{filename}.md"
@@ -13,10 +15,12 @@ def remove_file(filename):
     else:
         print(f"File {filename} does not exist.")
 
+
 def collapse_newlines(text):
     newlines = re.compile(r'\n\n+')
-    text = newlines.sub('\n\n',text)
+    text = newlines.sub('\n\n', text)
     return text
+
 
 def list_entries():
     """
@@ -24,9 +28,9 @@ def list_entries():
     """
     filenames = os.listdir("entries")
     # for each markdown file name, it replaces the .md extension
-    # for the empty space, then sort the resulting list 
-    entries_list  = [re.sub(r"\.md$", "", filename)
-                     for filename in filenames if filename.endswith(".md")]
+    # for the empty space, then sort the resulting list
+    entries_list = [re.sub(r"\.md$", "", filename)
+                    for filename in filenames if filename.endswith(".md")]
     entries_list.sort()
     return entries_list
 
@@ -34,6 +38,7 @@ def list_entries():
 def normalize(text):
     # remove white spaces => lower -> capitalize first char
     return text.replace(" ", "").lower().title()
+
 
 def save_entry(title, content):
     """
@@ -47,15 +52,27 @@ def save_entry(title, content):
     file.write(content)
     file.close()
 
+# this is a hack, because of problems with filenames in
+# Heroku.
+
+
+def get_filename(entry, entries):
+    for filename in entries:
+        if entry.lower() == filename.lower():
+            return filename
+    return entry
+
 
 def get_entry(title):
     """
     Retrieves an encyclopedia entry by its title. If no such
     entry exists, the function returns None.
     """
-    filename = f"entries/{title}.md"
+    entries = list_entries()
+    new_title = get_filename(title, entries)
+    filename = f"entries/{new_title}.md"
     try:
-        f = open(filename,'rt', encoding='utf-8')
+        f = open(filename, 'rt', encoding='utf-8')
         content = f.read()
         f.close()
         return content
